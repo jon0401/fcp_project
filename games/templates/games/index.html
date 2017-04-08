@@ -1,0 +1,76 @@
+{% extends 'games/base.html' %}
+
+{% block content %}
+    <div class="games featured-games">
+        <h1>Featured Games:</h1>
+        {% for game in featured_games %}
+            <div class="game">
+                <h1>
+                    <a href="{% url 'games:game' game.id %}">
+                        {{ game.name }}
+                        <img class="large-image" src="/media/{{ game.image }}" alt="{{ game.name }}">
+                    </a>
+                </h1>
+                <p>{{ game.description }}</p>
+                <div class="platforms-supported">
+                    <p>
+                        {% for platform in game.platforms.all %}
+                            {{ platform.name }}
+                        {% endfor %}
+                    </p>
+                </div>
+                <p>{{ game.genre }}</p>
+                <p>${{ game.price }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="games recommended-games">
+        <h1>Recommended Games:</h1>
+        {% for game in recommended_games %}
+            <div class="game recommended-game">
+                <h1>
+                    <a href="{% url 'games:game' game.id %}">
+                        {{ game.name }}
+                        <img class="small-image" src="/media/{{ game.image }}" alt="{{ game.name }}">
+                    </a>
+                </h1>
+                <p>{{ game.description }}</p>
+                <div class="platforms-supported">
+                    <p>
+                        {% for platform in game.platforms.all %}
+                            {{ platform.name }}
+                        {% endfor %}
+                    </p>
+                </div>
+                <p>{{ game.genre }}</p>
+                <p>${{ game.price }}</p>
+                <div class="tags">
+                    <p>
+                        {% for tag in game.tags.all %}
+                            {{ tag.name }}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="rewards">
+        <h1>My Active Unused Rewards:</h1>
+        <table>
+        <tr>
+            <th>Reward No.</th>
+            <th>Date of award</th>
+            <th>Date of expiry</th>
+        </tr>
+            {% for reward in rewards %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ reward.award_datetime }}</td>
+                    <td>{{ reward.expiry_datetime }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

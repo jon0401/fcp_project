@@ -1,0 +1,34 @@
+{% extends 'tags/base.html' %}
+
+{% block content %}
+    <div class="games">
+        <h1>Tags >> {{ tag }}</h1>
+        {% for game in games %}
+            <div class="game">
+                <h1>
+                    <a href="{% url 'games:game' game.id %}">
+                        {{ game.name }}
+                         <img class="small-image" src="/media/{{ game.image }}" alt="{{ game.name }}">
+                    </a>
+                </h1>
+                <p>{{ game.description }}</p>
+                <div class="platforms-supported">
+                    <p>
+                        {% for platform in game.platforms.all %}
+                            {{ platform.name }}
+                        {% endfor %}
+                    </p>
+                </div>
+                <p>{{ game.genre }}</p>
+                <p>${{ game.price }}</p>
+                <div class="tags">
+                    <p>
+                        {% for tag in game.tags.all %}
+                            {{ tag.name }}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

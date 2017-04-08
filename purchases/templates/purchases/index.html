@@ -1,0 +1,43 @@
+{% extends 'purchases/base.html' %}
+
+{% block content %}
+    <div class="purchases">
+        <h1>My Purchased Games:</h1>
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Date of Purchase</th>
+                <th>Game</th>
+            </tr>
+
+            {% for purchase in purchases %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ purchase.datetime }}</td>
+                    <td>
+                        <div class="game">
+                            <h1>
+                                <a href="{% url 'games:game' purchase.game.id %}">
+                                    {{ purchase.game.name }}
+                                    <img class="small-image" src="/media/{{ purchase.game.image }}" alt="{{ game.name }}">
+                                </a>
+                            </h1>
+                            <p>{{ purchase.game.description }}</p>
+                            <div class="platforms-supported">
+                                <p>
+                                    {% for platform in purchase.game.platforms.all %}
+                                        {{ platform.name }}
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            <p>{{ purchase.game.genre }}</p>
+                            <p>Current Price: ${{ purchase.game.price }}</p>
+                            <p>Purchased Price: ${{ purchase.original_amount }}</p>
+                            <p>Purchased Discounted Price: ${{ purchase.discounted_amount }}</p>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>    
+    </div>
+{% endblock %}

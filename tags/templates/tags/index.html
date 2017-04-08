@@ -1,0 +1,15 @@
+{% extends 'tags/base.html' %}
+
+{% block content %}
+    <div class="tags">
+        <h1>Member Tags</h1>
+        {% for tag in tags %}
+            <div class="tag">
+                <h2>
+                    <a href="{% url 'tags:tag' tag.name %}">{{ tag.name }}</a>
+                    ({{ tag.game_set.count }})
+                </h2>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

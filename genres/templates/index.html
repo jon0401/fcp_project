@@ -1,0 +1,15 @@
+{% extends 'genres/base.html' %}
+
+{% block content %}
+    <div class="genres">
+        <h1>Genres</h1>
+        {% for genre in genres %}
+            <div class="genre">
+                <h2>
+                    <a href="{% url 'genres:genre' genre.name %}">{{ genre.name }}</a>
+                    ({{ genre.games.count }})
+                </h2>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

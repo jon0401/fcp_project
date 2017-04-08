@@ -1,0 +1,42 @@
+{% extends 'games/base.html' %}
+
+{% block content %}
+    <div class="game">
+        <h1>{{ game.name }}</h1>
+        <img class="large-image" src="/media/{{ game.image }}" alt="{{ game.name }}">
+        <p>{{ game.detailed_description }}</p>
+        <p>{{ game.genre }}</p>
+        <p>${{ game.price }}</p>
+        <div class="tags">
+            <p>
+                {% for tag in game.tags.all %}
+                    {{ tag.name }}
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+
+    <form action="{% url 'tags:new' game.id %}" method="POST">
+        {% csrf_token %}
+        {{ tag_form }}
+        <input type="submit" value="Add New Tag">
+    </form>
+
+    <form action="{% url 'purchases:new' game.id %}" method="POST">
+        {% csrf_token %}
+        Use reward(s):
+        <select name="rewards_quantity">
+            <option value="0">0</option>
+            {% for reward in rewards|slice:":10" %}
+                <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+            {% endfor %}
+        </select>
+
+        Billing Method:
+        <select name="billing_method">
+            <option value="credit_card">Credit Card</option>
+            <option value="paypal">PayPal</option>
+        </select>
+        <input type="submit" value="Purchase Game">
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>FCP</title>
+</head>
+<body>
+    <div class="navigation">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'tags:tags' %}">Browse By Member Tags</a></li>
+            <li><a href="{% url 'genres:genres' %}">Browse By Genre</a></li>
+            <li><a href="{% url 'purchases:purchases' %}">Browse By Previously Purchased</a></li>
+        </ul>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
