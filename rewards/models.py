@@ -4,8 +4,8 @@ from django.utils import timezone
 
 # Create your models here.
 class Reward(models.Model):
-    award_datetime = models.DateTimeField(default=datetime.today, blank=True)
-    expiry_datetime = models.DateTimeField(default=datetime.today, blank=True)
+    award_datetime = models.DateTimeField(default=datetime.now, blank=True)
+    expiry_datetime = models.DateTimeField(default=datetime.now, blank=True)
     member = models.ForeignKey("users.Member")
     purchase = models.ForeignKey("purchases.Purchase", blank=True, null=True)
     check = models.BooleanField(default=False)

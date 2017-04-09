@@ -38,6 +38,4 @@ def new(request, gameID):
             member.use_rewards(rewards_used, purchase)
             member.save()
 
-            member.use_rewards(rewards_used, purchase)
-
     return redirect(reverse('games:game', kwargs={'id': gameID}))
