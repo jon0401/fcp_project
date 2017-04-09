@@ -30,6 +30,12 @@ def new(request, gameID):
                 billing_method = request.POST['billing_method']
             )
 
+            temp = member.reserved_amount + purchase.discounted_amount
+            while (temp >= 100):
+                temp -= 100
+                member.reward_set.create(member=member)
+            member.reserved_amount = temp
             member.use_rewards(rewards_used, purchase)
+            member.save()
 
     return redirect(reverse('games:game', kwargs={'id': gameID}))
