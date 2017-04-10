@@ -1,0 +1,17 @@
+
+{% block title %}{% endblock %}
+
+{% block content %}
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+    <a href = "{% url 'users:password_reset' %}">
+        <button type="submit"> forget password</button></a>
+    <br>
+    <br>
+    <p><strong> ------------------ OR ------------------ </strong></p>
+    <a href="{% url 'social:begin' 'github' %}">Login with Github</a>
+{% endblock %}
