@@ -2,15 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from rewards.models import Reward
 from games.models import Game
-
 from datetime import datetime
+
 
 # Create your models here.
 class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     display_name = models.CharField(max_length = 200)
     reserved_amount = models.DecimalField(max_digits=6, decimal_places=2, default=0, blank=True)
-    games = models.ManyToManyField("games.Game", through="purchases.Purchase")
+    games = models.ManyToManyField("games.Game", through="purchases.Purchase", blank=True)
 
     def __str__(self):
         return self.user.username
