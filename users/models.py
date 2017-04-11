@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from rewards.models import Reward
 from games.models import Game
-from datetime import datetime
+
+from datetime import *
+from django.utils import timezone
 
 
 # Create your models here.
@@ -19,7 +21,7 @@ class Member(models.Model):
         if(quantity > 10):
             quantity = 10
       
-        rewards = Reward.objects.filter(member=self, purchase__isnull=True, expiry_datetime__gt=datetime.now()).order_by('expiry_datetime')[:quantity]
+        rewards = Reward.objects.filter(member=self, purchase__isnull=True, expiry_datetime__gt=timezone.now()).order_by('expiry_datetime')[:quantity]
         for reward in rewards:
             reward.purchase = purchase
             reward.save()
@@ -48,3 +50,11 @@ class Member(models.Model):
             return True
         else:
             return False
+
+    def remove_expired_rewards(self):
+        rewards = self.reward_set.all()
+        for reward in rewards:
+            reward.checking()
+
+        self.reward_set.all().filter(check=True).delete()
+        self.save()

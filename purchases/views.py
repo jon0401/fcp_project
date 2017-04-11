@@ -6,8 +6,6 @@ from .models import Purchase
 from users.models import Member
 from games.models import Game
 
-from decimal import Decimal
-
 # Create your views here.
 @login_required
 def index(request):
@@ -29,7 +27,7 @@ def new(request, gameID):
                     member = member,
                     game = game,
                     original_amount = game.price,
-                    discounted_amount = Purchase.get_discounted_amount(game.price, rewards_used),
+                    discounted_amount = game.calculate_discounted_amount(rewards_used),
                     billing_method = request.POST['billing_method']
                 )
                 member.use_rewards(rewards_used, purchase)

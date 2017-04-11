@@ -23,10 +23,7 @@ def show(request, id):
     game = Game.objects.get(pk=id)
     tag_form = TagForm()
 
-    for orgg in request.user.member.reward_set.all():
-        orgg.checking()
-    request.user.member.reward_set.all().filter(check=True).delete()
-    request.user.member.save()
+    request.user.member.remove_expired_rewards()
 
     rewards = Reward.objects.filter(member=request.user.member, purchase__isnull=True)
     return render(request, 'games/show.html', {'game': game, 'tag_form': tag_form, 'rewards': rewards})
