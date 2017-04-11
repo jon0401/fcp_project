@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404,redirect, HttpResponseRedirect, reverse
 from django.contrib.auth import authenticate, login,logout
 from django.views.generic import View
-from .form import MemberForm
-from .models import Member
 import warnings
 from django.core.urlresolvers import reverse,resolve
 from django.http import HttpResponseRedirect, QueryDict
@@ -15,6 +13,9 @@ from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login,
     logout as auth_logout, get_user_model, update_session_auth_hash)
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm, PasswordChangeForm
 from django.contrib.auth.tokens import default_token_generator
+
+from .form import MemberForm
+from .models import Member
 
 def logout_view(request):
     logout(request)

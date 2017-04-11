@@ -39,3 +39,12 @@ class Member(models.Model):
             recommended_games.append(best_matches[0])
 
         return list(set(recommended_games))
+
+    def has_purchased(self, game):
+        purchases = self.purchase_set.all()
+        purchased_games = [purchase.game for purchase in purchases]
+
+        if game in purchased_games:
+            return True
+        else:
+            return False

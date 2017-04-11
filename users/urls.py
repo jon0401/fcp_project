@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
-from . import views
 from django.contrib.auth import views as auth_views
+from . import views
 
 app_name = 'users'
 
@@ -16,6 +16,4 @@ urlpatterns = [
         views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
-
-
 ]

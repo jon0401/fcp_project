@@ -24,5 +24,3 @@ class Reward(models.Model):
 
     class Meta(object):
         ordering = ('award_datetime',)
-
-

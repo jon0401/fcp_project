@@ -15,6 +15,16 @@ class Purchase(models.Model):
     def __str__(self):
         return self.game.name + ' - ' + str(self.datetime)
 
+    def issue_rewards(self, member):
+        temp = member.reserved_amount + self.discounted_amount
+
+        while (temp >= 100):
+            temp -= 100
+            member.reward_set.create(member=member)
+
+        member.reserved_amount = temp
+        member.save()
+
     def get_discounted_amount(original_amount, rewards_used):
         discounted_amount = (Decimal(1) - (Decimal(0.1) * rewards_used)) * original_amount
 
