@@ -54,7 +54,5 @@ class Member(models.Model):
     def remove_expired_rewards(self):
         rewards = self.reward_set.all()
         for reward in rewards:
-            reward.checking()
-
-        self.reward_set.all().filter(check=True).delete()
-        self.save()
+            if reward.isExpired():
+                reward.delete()

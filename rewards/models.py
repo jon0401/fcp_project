@@ -11,7 +11,6 @@ class Reward(models.Model):
     expiry_datetime = models.DateTimeField(default=calculate_expiry_datetime, blank=True)
     member = models.ForeignKey("users.Member")
     purchase = models.ForeignKey("purchases.Purchase", blank=True, null=True)
-    check = models.BooleanField(default=False)
 
     def __str__(self):
         if(self.purchase is None):
@@ -19,10 +18,9 @@ class Reward(models.Model):
         else:
             return str(self.award_datetime) + ' ****USED'
 
-    def checking(self):
-        if(self.expiry_datetime <= timezone.now()):
-            self.check = True
-        self.save()
+    def isExpired(self):
+        if(timezone.now() >= self.expiry_datetime):
+            return True
 
     class Meta(object):
         ordering = ('award_datetime',)
