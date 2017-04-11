@@ -32,8 +32,8 @@
                             </div>
                             <p>{{ purchase.game.genre }}</p>
                             <p>Current Price: ${{ purchase.game.price }}</p>
-                            <p>Purchased Price: ${{ purchase.original_amount }}</p>
-                            <p>Purchased Discounted Price: ${{ purchase.discounted_amount }}</p>
+                            <p>Purchased Price: ${{ purchase.payment.original_amount }}</p>
+                            <p>Purchased Discounted Price: ${{ purchase.payment.discounted_amount }}</p>
                         </div>
                     </td>
                 </tr>

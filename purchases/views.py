@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
 from .models import Purchase
+from payments.models import Payment
 from users.models import Member
 from games.models import Game
 
@@ -25,13 +26,17 @@ def new(request, gameID):
             if not member.has_purchased(game):
                 rewards_used = Decimal(request.POST['rewards_quantity'])
 
-                purchase = Purchase.objects.create(
-                    member = member,
-                    game = game,
+                payment = Payment.objects.create(
                     original_amount = game.price,
                     discounted_amount = game.calculate_discounted_amount(rewards_used),
                     billing_method = request.POST['billing_method']
                 )
+                purchase = Purchase.objects.create(
+                    member = member,
+                    game = game,
+                    payment = payment
+                )
+                
                 member.use_rewards(rewards_used, purchase)
                 purchase.issue_rewards(member)
                 

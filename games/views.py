@@ -20,7 +20,7 @@ def index(request):
     rewards = Reward.objects.filter(member=member, purchase__isnull=True)
     recommended_games = member.get_recommended_games()
 
-    return render(request, 'games/index.html', {'featured_games': featured_games, 'rewards': rewards, 'recommended_games': recommended_games})
+    return render(request, 'games/index.html', {'featured_games': featured_games, 'rewards': rewards, 'recommended_games': recommended_games, 'member': member})
 
 @login_required
 def show(request, id):

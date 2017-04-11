@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'payments.apps.PaymentsConfig',
     'platforms.apps.PlatformsConfig',
     'genres.apps.GenresConfig',
     'users.apps.UsersConfig',

@@ -56,3 +56,6 @@ class Member(models.Model):
         for reward in rewards:
             if reward.isExpired():
                 reward.delete()
+
+    def calculate_spending_required_for_next_reward(self):
+        return 100 - self.reserved_amount
