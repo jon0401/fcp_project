@@ -12,6 +12,13 @@
         <button type="submit"> forget password</button></a>
     <br>
     <br>
+    <li class = "">
+        <a href = "{% url 'users:register' %}">
+            <span class ="glyphicon glyphicon-user" aria-hidden ="true"> </span>&nbsp;&nbsp; Register Account
+        </a>
+    </li>
+    <br>
+    <br>
     <p><strong> ------------------ OR ------------------ </strong></p>
     <a href="{% url 'social:begin' 'github' %}">Login with Github</a>
 {% endblock %}

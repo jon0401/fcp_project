@@ -11,7 +11,7 @@ class Game(models.Model):
     genre = models.ForeignKey("genres.Genre")
     price = models.DecimalField(max_digits = 6, decimal_places = 2)
     tags = models.ManyToManyField("tags.Tag")
-    release_datetime = models.DateTimeField(default=datetime.now())
+    release_datetime = models.DateTimeField(default=datetime.now)
     image = models.ImageField(upload_to='images/', default='/static/defaultGame.png')
     featured = models.BooleanField(default=False)
 
