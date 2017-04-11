@@ -6,6 +6,8 @@ from .models import Purchase
 from users.models import Member
 from games.models import Game
 
+from decimal import Decimal
+
 # Create your views here.
 @login_required
 def index(request):

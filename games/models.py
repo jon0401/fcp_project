@@ -21,7 +21,7 @@ class Game(models.Model):
         return self.name
 
     def calculate_discounted_amount(self, rewards_used):
-        discounted_amount = (Decimal(1) - (Decimal(0.1) * rewards_used)) * sef.price
+        discounted_amount = (Decimal(1) - (Decimal(0.1) * rewards_used)) * self.price
 
         if(discounted_amount > Decimal(0)):
             return discounted_amount
