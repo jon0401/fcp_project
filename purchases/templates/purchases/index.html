@@ -25,7 +25,7 @@
                                     {{ purchase.game.name }}
                                     <!-- <img class="small-image" src="/media/{{ purchase.game.image }}" alt="{{ game.name }}"> -->
                                 </a>
-                                <p>Purchased Price: ${{ purchase.discounted_amount }}</p>
+                                <p>Purchased Price (discounted): ${{ purchase.payment.discounted_amount }}</p>
                             </h1>
                             <!-- <p>{{ purchase.game.description }}</p> -->
                             <!-- <div class="platforms-supported">
@@ -37,7 +37,7 @@
                             </div> -->
                             <!-- <p>{{ purchase.game.genre }}</p>
                             <p>Current Price: ${{ purchase.game.price }}</p>
-                            <p>Purchased Price: ${{ purchase.original_amount }}</p> -->
+                            <p>Purchased Price (non-discounted): ${{ purchase.payment.original_amount }}</p> -->
 
                         </div>
                     </td>
