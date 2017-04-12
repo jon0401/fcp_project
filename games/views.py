@@ -10,7 +10,7 @@ def index(request):
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
 
     else:
-        if Member.objects.filter(user=request.user) is None:
+        if not Member.objects.filter(user=request.user):
             member = Member(user=request.user, display_name=request.user.username)
             member.save()
         featured_games = Game.objects.filter(featured=True)
