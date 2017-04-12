@@ -9,7 +9,7 @@ from tags.forms import TagForm
 
 @login_required
 def index(request):
-    if Member.objects.filter(user=request.user) is None:
+    if not Member.objects.filter(user=request.user):
         member = Member(user=request.user, display_name=request.user.username)
         member.save()
 
