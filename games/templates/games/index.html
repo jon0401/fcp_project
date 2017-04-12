@@ -1,81 +1,75 @@
 {% extends 'games/base.html' %}
 
 {% block content %}
-    <div class="games featured-games">
-        <h1>Featured Games:</h1>
-        {% for game in featured_games %}
-            <div class="game">
-                <h1>
-                    <a href="{% url 'games:game' game.id %}">
-                        {{ game.name }}
-                        <img class="large-image" src="/media/{{ game.image }}" alt="{{ game.name }}">
-                    </a>
-                </h1>
-                <p>{{ game.description }}</p>
-                <div class="platforms-supported">
-                    <p>
-                        {% for platform in game.platforms.all %}
-                            {{ platform.name }}
-                        {% endfor %}
-                    </p>
-                </div>
-                <p>{{ game.genre }}</p>
-                <p>${{ game.price }}</p>
-            </div>
-        {% endfor %}
+    <div class="home cover" style="background-image: url('http://az616578.vo.msecnd.net/files/2016/08/08/6360623745264558091520775165_games.jpg'); background-size: cover;">
+      <div class="overlay">
+        <h1 class="name">Your Best Gaming Experiences</h1>
+        <div class="actions">
+          <input type="text" name="" placeholder="Search Game..." value="">
+        </div>
+      </div>
     </div>
 
-    <div class="games recommended-games">
-        <h1>Recommended Games:</h1>
-        {% for game in recommended_games %}
-            <div class="game recommended-game">
-                <h1>
-                    <a href="{% url 'games:game' game.id %}">
-                        {{ game.name }}
-                        <img class="small-image" src="/media/{{ game.image }}" alt="{{ game.name }}">
-                    </a>
-                </h1>
-                <p>{{ game.description }}</p>
-                <div class="platforms-supported">
-                    <p>
-                        {% for platform in game.platforms.all %}
-                            {{ platform.name }}
-                        {% endfor %}
-                    </p>
-                </div>
-                <p>{{ game.genre }}</p>
-                <p>${{ game.price }}</p>
-                <div class="tags">
-                    <p>
-                        {% for tag in game.tags.all %}
-                            {{ tag.name }}
-                        {% endfor %}
-                    </p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
 
-    <div class="rewards">
-        <h1>My Active Unused Rewards:</h1>
+    <div class="main home">
+      <h1>Featured Games:</h1>
+      <div class="featured-games">
+        <ul class="games">
+          {% for game in featured_games %}
+              <a href="{% url 'games:game' game.id %}">
+                <li class="game" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
+                  <div class="overlay">
+                    <h2>{{ game.name }}<div>{{ game.genre }}</div></h2>
+                  </div>
+                </li>
+              </a>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <h1>Recommended Games:</h1>
+      <div class="recommended-games">
+        <ul class="games">
+          {% for game in recommended_games %}
+              <a href="{% url 'games:game' game.id %}">
+                <li class="game" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
+                  <div class="overlay">
+                    <h2>{{ game.name }}<div>{{ game.genre }}</div></h2>
+                  </div>
+                </li>
+              </a>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <h1>My Active Unused Rewards: {{ rewards | length }}</h1>
+      <div class="rewards">
         <table>
-        <tr>
-            <th>Reward No.</th>
-            <th>Date of award</th>
-            <th>Date of expiry</th>
-        </tr>
-            {% for reward in rewards %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ reward.award_datetime }}</td>
-                    <td>{{ reward.expiry_datetime }}</td>
-                </tr>
-            {% endfor %}
+          <tr>
+              <th>Reward No.</th>
+              <th>Date of award</th>
+              <th>Date of expiry</th>
+          </tr>
+          {% for reward in rewards %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ reward.award_datetime }}</td>
+                <td>{{ reward.expiry_datetime }}</td>
+            </tr>
+          {% endfor %}
         </table>
+      </div>
+
+      <div class="spending-required-for-next-reward">
+          <h1>Spending required for next Reward:</h1>
+          <p>${{ member.calculate_spending_required_for_next_reward }}</p>
+      </div>
     </div>
 
-    <div class="spending-required-for-next-reward">
-        <h1>Spending required for next Reward:</h1>
-        <p>${{ member.calculate_spending_required_for_next_reward }}</p>
+
+
+
+    <div class="footer home">
+      <p>Copyright &copy; 2016 SE GAMING. All rights reserved. Powered by Group J.</p>
     </div>
 {% endblock %}

@@ -1,15 +1,19 @@
 {% extends 'tags/base.html' %}
 
 {% block content %}
-    <div class="tags">
-        <h1>Member Tags</h1>
-        {% for tag in tags %}
-            <div class="tag">
-                <h2>
-                    <a href="{% url 'tags:tag' tag.name %}">{{ tag.name }}</a>
-                    ({{ tag.game_set.count }})
-                </h2>
-            </div>
-        {% endfor %}
+    <div class="cover download" style="background-image: url('http://na.leagueoflegends.com/sites/default/files/upload/art/morgana_vs_ahri_3.jpg'); background-size: cover;">
+      <div class="overlay">
+        <h1 class="name">Browse games by Tags</h1>
+        <div class="tags" style="display: flex; flex-direction: column; align-items: center;">
+            {% for tag in tags %}
+                <div class="tag">
+                    <p>
+                        <a href="{% url 'tags:tag' tag.name %}">{{ tag.name }}</a>
+                        ({{ tag.game_set.count }})
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
     </div>
 {% endblock %}

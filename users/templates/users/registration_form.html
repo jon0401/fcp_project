@@ -1,4 +1,86 @@
-{% block body %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Registration</title>
+    <style media="screen">
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url('http://az616578.vo.msecnd.net/files/2016/08/08/6360623745264558091520775165_games.jpg');
+        background-size: cover;
+        position: relative;
+      }
+
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.8);
+        z-index: 1;
+      }
+
+      h2, h3 {
+        margin: 0;
+      }
+
+      p {
+        margin: 5px 0;
+      }
+
+      .content {
+        height: 100%;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      form {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 8px 0 rgba(0,0,0,.8);
+        border-radius: 10px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 70px 50px;
+      }
+
+      button {
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="content">
+
+
+      <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+          <h3 style="margin-bottom: 15px;">Create a New Account</h3>
+          {% csrf_token %}
+          {% include 'users/form-template.html' %}
+          <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                  <button style="margin-top: 15px;" type="submit" class ="btn btn-success">Submit</button>
+              </div>
+          </div>
+      </form>
+
+
+    </div>
+  </body>
+</html>
+
+{% endblock %}
+
+
+<!-- {% block body %}
     <div class="container-fluid">
 
         <div class ="row">
@@ -6,20 +88,11 @@
             <div class ="col-sm-12 col-md-7">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>Create a New Account</h3>
-                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% include 'users/form-template.html' %}
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class ="btn btn-success">Submit</button>
-                                </div>
-                            </div>
-                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-{% endblock %}
+{% endblock %} -->

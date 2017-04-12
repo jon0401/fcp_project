@@ -1,8 +1,45 @@
 <html>
 <head>
-    <title>FCP</title>
+    <title>Purchased Games | FCP</title>
+    <link rel="stylesheet" href="/media/static/games.css" />
+    <style media="screen">
+      .purchases {
+        width: 100%;
+      }
+
+      table {
+        margin-top: 30px;
+        margin: 30px auto;
+        width: 70%;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      h1 p {
+        font-size: 16px;
+        font-weight: normal;
+      }
+    </style>
 </head>
 <body>
+
+    <div class="menu">
+      <h2>FCP</h2>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'tags:tags' %}">Browse By Member Tags</a></li>
+        <li><a href="{% url 'genres:genres' %}">Browse By Genre</a></li>
+        <li><a href="{% url 'purchases:purchases' %}">Browse By Previously Purchased</a></li>
+        <li class = "">
+            <a href = "{% url 'users:logout_view' %}">
+                <span class ="glyphicon glyphicon-off" aria-hidden ="true"> </span>&nbsp; Logout
+            </a>
+        </li>
+      </ul>
+    </div>
+
     {% block content %}
     {% endblock %}
 </body>

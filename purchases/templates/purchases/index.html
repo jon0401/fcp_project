@@ -1,8 +1,12 @@
 {% extends 'purchases/base.html' %}
 
 {% block content %}
+    <div class="home cover" style="background-image: url('http://az616578.vo.msecnd.net/files/2016/08/08/6360623745264558091520775165_games.jpg'); background-size: cover;">
+      <div class="overlay">
+        <h1 class="name">Your Purchased History</h1>
+      </div>
+    </div>
     <div class="purchases">
-        <h1>My Purchased Games:</h1>
         <table>
             <tr>
                 <th>No.</th>
@@ -19,25 +23,30 @@
                             <h1>
                                 <a href="{% url 'games:game' purchase.game.id %}">
                                     {{ purchase.game.name }}
-                                    <img class="small-image" src="/media/{{ purchase.game.image }}" alt="{{ game.name }}">
+                                    <!-- <img class="small-image" src="/media/{{ purchase.game.image }}" alt="{{ game.name }}"> -->
                                 </a>
+                                <p>Purchased Price: ${{ purchase.discounted_amount }}</p>
                             </h1>
-                            <p>{{ purchase.game.description }}</p>
-                            <div class="platforms-supported">
+                            <!-- <p>{{ purchase.game.description }}</p> -->
+                            <!-- <div class="platforms-supported">
                                 <p>
                                     {% for platform in purchase.game.platforms.all %}
                                         {{ platform.name }}
                                     {% endfor %}
                                 </p>
-                            </div>
-                            <p>{{ purchase.game.genre }}</p>
+                            </div> -->
+                            <!-- <p>{{ purchase.game.genre }}</p>
                             <p>Current Price: ${{ purchase.game.price }}</p>
-                            <p>Purchased Price: ${{ purchase.payment.original_amount }}</p>
-                            <p>Purchased Discounted Price: ${{ purchase.payment.discounted_amount }}</p>
+                            <p>Purchased Price: ${{ purchase.original_amount }}</p> -->
+
                         </div>
                     </td>
                 </tr>
             {% endfor %}
-        </table>    
+        </table>
+    </div>
+
+    <div class="footer home">
+      <p>Copyright &copy; 2016 SE GAMING. All rights reserved. Powered by Group J.</p>
     </div>
 {% endblock %}
