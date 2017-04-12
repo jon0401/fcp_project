@@ -144,12 +144,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = 'home'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'fcpproject'
-EMAIL_HOST_USER = 'fcp.kfc.mcd@gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_PASSWORD = 'fcpproject'
+# EMAIL_HOST_USER = 'fcp.kfc.mcd@gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SOCIAL_AUTH_GITHUB_KEY = '7838a1cf298e871cda98'
 SOCIAL_AUTH_GITHUB_SECRET = '400e7cb6b0ea992e5759cf458078ef963da7179c'
