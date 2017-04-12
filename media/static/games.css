@@ -151,7 +151,7 @@ a {
 }
 
 .cover .overlay .actions .btn {
-  width: 170px;
+  width: 200px;
   height: 50px;
   background-color: rgba(241, 196, 15, 0.8);
   display: -webkit-box;
@@ -169,6 +169,21 @@ a {
   margin: 0 20px;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+}
+
+.genre {
+  color: #FFF;
+  background-color: rgb(241, 196, 15);
+  width: 70px;
+  height: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  border-radius: 10px;
 }
 
 .cover .overlay .actions .btn:hover {
@@ -296,6 +311,32 @@ a {
 .main.home ul.games li .overlay h2 div {
   color: #F1C40F;
   font-size: 16px;
+}
+
+.main.home ul.games li .overlay h2 div > div {
+  display: inline-block;
+  color: #FFF;
+  font-size: 12px;
+  background-color: #F1C40F;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.main.home ul.games li .overlay h2 p {
+  font-size: 14px;
+  opacity: 0.8;
+  font-weight: normal;
+  margin-top: 10px;
+}
+
+.main.home ul.games li .overlay h2 span {
+  display: block;
+  opacity: 0.8;
+  font-size: 14px;
+  color: #FFF;
+  margin-top: -10px;
 }
 
 .main .row {
