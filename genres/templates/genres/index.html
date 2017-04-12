@@ -1,7 +1,7 @@
 {% extends 'genres/base.html' %}
 
 {% block content %}
-    <div class="genres">
+    <!-- <div class="genres">
         <h1>Genres</h1>
         {% for genre in genres %}
             <div class="genre">
@@ -11,5 +11,21 @@
                 </h2>
             </div>
         {% endfor %}
+    </div> -->
+
+    <div class="cover download" style="background-image: url('http://na.leagueoflegends.com/sites/default/files/upload/art/morgana_vs_ahri_3.jpg'); background-size: cover;">
+      <div class="overlay">
+        <h1 class="name">Browse games by Genres</h1>
+        <div class="tags" style="display: flex; flex-direction: column; align-items: center;">
+            {% for genre in genres %}
+                <div class="tag">
+                    <p>
+                        <a href="{% url 'genres:genre' genre.name %}">{{ genre.name }}</a>
+                        ({{ genre.game_set.count }})
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
     </div>
 {% endblock %}

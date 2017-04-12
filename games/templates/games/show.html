@@ -1,42 +1,126 @@
 {% extends 'games/base.html' %}
 
 {% block content %}
-    <div class="game">
-        <h1>{{ game.name }}</h1>
-        <img class="large-image" src="/media/{{ game.image }}" alt="{{ game.name }}">
-        <p>{{ game.detailed_description }}</p>
-        <p>{{ game.genre }}</p>
-        <p>${{ game.price }}</p>
-        <div class="tags">
-            <p>
-                {% for tag in game.tags.all %}
-                    {{ tag.name }}
-                {% endfor %}
-            </p>
-        </div>
+<div class="cover" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
+  <div class="overlay">
+    <h1 class="name">{{ game.name }}</h1>
+    <div class="actions" style="margin-top: 15px;">
+      <a class="btn" href="#checkout">Checkout</a>
     </div>
+  </div>
+</div>
 
-    <form action="{% url 'tags:new' game.id %}" method="POST">
-        {% csrf_token %}
-        {{ tag_form }}
-        <input type="submit" value="Add New Tag">
-    </form>
+<div class="main">
+  <div class="row">
+    <div class="left">
+      <div class="intro">
+        <h2>Game Description</h2>
+        <p>{{ game.detailed_description }}</p>
+      </div>
 
-    <form action="{% url 'purchases:new' game.id %}" method="POST">
-        {% csrf_token %}
-        Use reward(s):
-        <select name="rewards_quantity">
-            <option value="0">0</option>
-            {% for reward in rewards|slice:":10" %}
-                <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+      <!-- <div class="author">
+        <h2>Author</h2>
+        <p>League of Legends has an active and widespread competitive scene. In North America and Europe, Riot Games organizes the League Championship Series (LCS), located in Los Angeles and Berlin respectively, which consists of 10 professional teams in each continent.[9] Similar regional competitions exist in China (LPL), South Korea (LCK), Taiwan (LMS), Southeast Asia (GPL), and various other regions.[10] These regional competitions culminate with the annual World Championship. The 2016 World Championship had 43 million unique viewers and a total prize pool of over 6 million USD.[11]</p>
+      </div> -->
+    </div>
+    <div class="right">
+      <div class="tags">
+        <h2>Tags</h2>
+        <ul>
+          {% for tag in game.tags.all %}
+              <li>{{ tag.name }}</li>
+          {% endfor %}
+        </ul>
+
+        <h3>Add your tags</h3>
+        <form action="{% url 'tags:new' game.id %}" method="POST">
+            {% csrf_token %}
+            {{ tag_form }}
+            <input type="submit" value="Add New Tag">
+        </form>
+      </div>
+
+      <div class="sys">
+        <h2>System Requirement</h2>
+        <!-- <p>Processor: 2.4+ GHz Quad core</p>
+        <p>Memory: 2 GB RAM</p>
+        <p>Graphics: NVIDIA GTX 260 or ATI 4850</p>
+        <p>Network: Broadband Internet connection</p>
+        <p>Storage: 5 GB available space</p> -->
+        {% for sys in game.platforms.all %}
+            <p>{{ sys.name }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="suggest">
+        <h2>Recommendations</h2>
+        <ul>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="game">
+
+    <p>{{ game.detailed_description }}</p>
+    <p>{{ game.genre }}</p>
+    <p>${{ game.price }}</p>
+    <div class="tags">
+        <p>
+            {% for tag in game.tags.all %}
+                {{ tag.name }}
             {% endfor %}
-        </select>
+        </p>
+    </div>
+</div> -->
 
-        Billing Method:
-        <select name="billing_method">
-            <option value="credit_card">Credit Card</option>
-            <option value="paypal">PayPal</option>
-        </select>
-        <input type="submit" value="Purchase Game">
-    </form>
+
+<form action="{% url 'purchases:new' game.id %}" method="POST" id="checkout">
+  {% csrf_token %}
+  <h2>Checkout</h2>
+  <label>
+    Full Name:
+    <input type="text" name="" placeholder="Donald Trump" value="">
+  </label>
+
+  <label>
+    Billing Address:
+    <input type="text" name="" placeholder="the White House" value="">
+  </label>
+
+  <label>
+    Credit Card Number:
+    <input type="text" name="" placeholder="1111-2222-3333-4444" value="">
+  </label>
+
+  <label>
+    Use reward(s):
+    <select name="rewards_quantity">
+        <option value="0">0</option>
+        {% for reward in rewards|slice:":10" %}
+            <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+        {% endfor %}
+    </select>
+  </label>
+
+  <label>
+    Billing Method:
+    <select name="billing_method">
+      <option value="credit_card">Credit Card</option>
+      <option value="paypal">PayPal</option>
+    </select>
+  </label>
+
+  <a href="/download.html"><input type="submit" name="" value="Purchase Game"></a>
+  <!-- <input type="submit" value="Purchase Game"> -->
+</form>
+
+
+<div class="footer">
+  <p>Copyright &copy; 2016 SE GAMING. All rights reserved. Powered by Group J.</p>
+</div>
 {% endblock %}

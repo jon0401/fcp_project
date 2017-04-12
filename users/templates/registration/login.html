@@ -2,23 +2,84 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-    <a href = "{% url 'users:password_reset' %}">
-        <button type="submit"> forget password</button></a>
-    <br>
-    <br>
-    <li class = "">
-        <a href = "{% url 'users:register' %}">
-            <span class ="glyphicon glyphicon-user" aria-hidden ="true"> </span>&nbsp;&nbsp; Register Account
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <style media="screen">
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url('http://az616578.vo.msecnd.net/files/2016/08/08/6360623745264558091520775165_games.jpg');
+        background-size: cover;
+        position: relative;
+      }
+
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.8);
+        z-index: 1;
+      }
+
+      h2 {
+        margin: 0;
+      }
+
+      p {
+        margin: 5px 0;
+      }
+
+      .content {
+        height: 100%;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      form {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 8px 0 rgba(0,0,0,.8);
+        border-radius: 10px;
+        display: inline-flex;
+        flex-direction: column;
+        padding: 70px 50px;
+      }
+
+      button {
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="content">
+
+      <form method="post">
+        <h2>Login</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+        <a style="margin-top: 20px; align-self: center;" href = "{% url 'users:password_reset' %}">
+          forget password
         </a>
-    </li>
-    <br>
-    <br>
-    <p><strong> ------------------ OR ------------------ </strong></p>
-    <a href="{% url 'social:begin' 'github' %}">Login with Github</a>
+        <a style="align-self: center;" href = "{% url 'users:register' %}">
+            <!-- <span class ="glyphicon glyphicon-user" aria-hidden ="true"> </span>&nbsp;&nbsp;  -->
+            Register Account
+        </a>
+
+        <p style="align-self: center;"><strong> ------------------ OR ------------------ </strong></p>
+        <a href="{% url 'social:begin' 'github' %}" style="align-self: center">Login with Github</a>
+      </form>
+
+
+    </div>
+  </body>
+</html>
+
 {% endblock %}

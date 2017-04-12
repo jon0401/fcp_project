@@ -1,7 +1,33 @@
 {% extends 'genres/base.html' %}
 
 {% block content %}
-    <div class="games">
+    <div class="home cover" style="background-image: url('http://az616578.vo.msecnd.net/files/2016/08/08/6360623745264558091520775165_games.jpg'); background-size: cover;">
+      <div class="overlay">
+        <h1 class="name">Genres >> {{ genre }}</h1>
+      </div>
+    </div>
+
+    <div class="main home">
+      <h1>Games in {{ genre }}:</h1>
+      <div class="featured-games">
+        <ul class="games">
+          {% for game in games %}
+              <a href="{% url 'games:game' game.id %}">
+                <li class="game" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
+                  <div class="overlay">
+                    <h2>{{ game.name }}<div>{{ game.genre }}</div></h2>
+                  </div>
+                </li>
+              </a>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer home">
+      <p>Copyright &copy; 2016 SE GAMING. All rights reserved. Powered by Group J.</p>
+    </div>
+    <!-- <div class="games">
         <h1>Genres >> {{ genre }}</h1>
         {% for game in games %}
             <div class="game">
@@ -29,5 +55,5 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
+    </div> -->
 {% endblock %}
