@@ -13,6 +13,7 @@ class Member(models.Model):
     display_name = models.CharField(max_length = 200)
     reserved_amount = models.DecimalField(max_digits=6, decimal_places=2, default=0, blank=True)
     games = models.ManyToManyField("games.Game", through="purchases.Purchase", blank=True)
+    avatar = models.ImageField(default=0, blank=True)
 
     def __str__(self):
         return self.user.username

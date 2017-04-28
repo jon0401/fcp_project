@@ -8,6 +8,7 @@ from users.models import Member
 from games.models import Game
 
 from decimal import Decimal
+from django.core.mail import EmailMessage
 
 # Create your views here.
 @login_required
@@ -38,6 +39,10 @@ def new(request, gameID):
                 )
                 
                 member.use_rewards(rewards_used, purchase)
+                email = EmailMessage('Purchase Confirmation',
+                                     'Dear ' + request.user.username + ',\n' + 'Thank you for purchasing ' + purchase.game.name + '!',
+                                     to=[request.user.email])
+                email.send()
                 purchase.issue_rewards(member)
-                
+
     return redirect(reverse('games:game', kwargs={'id': gameID}))

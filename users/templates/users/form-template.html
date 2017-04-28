@@ -8,6 +8,62 @@
         <div class="col-sm-offset-2 col-sm-10">
             <span class="text-danger small">{{ field.errors }}</span>
         </div>
+{#        <label class="control-label col-sm-2">#}
+{#            {{ form.0.label_tag }}#}
+{#        </label>#}
+{#        <div class="col-sm-10"> {{ field }}</div>#}
+{#        <div class="col-sm-offset-2 col-sm-10">#}
+{#            <span class="text-danger small">{{ field.errors }}</span>#}
+{#        </div>#}
+{#        <label class="control-label col-sm-2">#}
+{#            {{ form.0.label_tag }}#}
+{#        </label>#}
+{#        <div class="col-sm-10"> {{ field }}</div>#}
+{#        <div class="col-sm-offset-2 col-sm-10">#}
+{#            <span class="text-danger small">{{ field.errors }}</span>#}
+{#        </div>#}
+{#        <label class="control-label col-sm-2">#}
+{#            {{ form.0.label_tag }}#}
+{#        </label>#}
+{#        <div class="col-sm-10"> {{ field }}</div>#}
+{#        <div class="col-sm-offset-2 col-sm-10">#}
+{#            <span class="text-danger small">{{ field.errors }}</span>#}
+{#        </div>#}
+
+    </div>
+{% endfor %}
+
+{% for field in form2 %}
+    <div class="form-group">
+
+        <label class="control-label col-sm-2">
+            {{ field.label_tag }}
+        </label>
+        <div class="col-sm-10"> {{ field }}</div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <span class="text-danger small">{{ field.errors }}</span>
+        </div>
+{#        <label class="control-label col-sm-2">#}
+{#            {{ form.0.label_tag }}#}
+{#        </label>#}
+{#        <div class="col-sm-10"> {{ field }}</div>#}
+{#        <div class="col-sm-offset-2 col-sm-10">#}
+{#            <span class="text-danger small">{{ field.errors }}</span>#}
+{#        </div>#}
+{#        <label class="control-label col-sm-2">#}
+{#            {{ form.0.label_tag }}#}
+{#        </label>#}
+{#        <div class="col-sm-10"> {{ field }}</div>#}
+{#        <div class="col-sm-offset-2 col-sm-10">#}
+{#            <span class="text-danger small">{{ field.errors }}</span>#}
+{#        </div>#}
+{#        <label class="control-label col-sm-2">#}
+{#            {{ form.0.label_tag }}#}
+{#        </label>#}
+{#        <div class="col-sm-10"> {{ field }}</div>#}
+{#        <div class="col-sm-offset-2 col-sm-10">#}
+{#            <span class="text-danger small">{{ field.errors }}</span>#}
+{#        </div>#}
 
     </div>
 {% endfor %}

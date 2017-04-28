@@ -9,6 +9,9 @@ urlpatterns = [
     # url(r'^(?P<name>\w+)$', views.show, name='user'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^register/$',views.UserFormView.as_view(), name ='register'),
+
+    url(r'^update/$', views.UserUpdate.as_view(), name = 'update'),
+
     url(r'logout/$',views.logout_view, name ='logout_view'),
     url(r'^password_reset/$', views.password_reset, name='password_reset'),
     url(r'^password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
@@ -16,4 +19,6 @@ urlpatterns = [
         views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
+
+
 ]

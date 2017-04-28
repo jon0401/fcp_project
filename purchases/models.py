@@ -3,6 +3,7 @@ from payments.models import Payment
 
 from datetime import *
 from django.utils import timezone
+from django.core.mail import EmailMessage
 
 # Create your models here.
 class Purchase(models.Model):
@@ -20,6 +21,10 @@ class Purchase(models.Model):
         while (temp >= 100):
             temp -= 100
             member.reward_set.create(member=member)
+            email = EmailMessage('New Reward Point',
+                                 'Thank you for your purhcase again! You gain one new reward point!',
+                                 to=[member.user.email])
+            email.send()
 
         member.reserved_amount = temp
         member.save()

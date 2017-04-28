@@ -13,9 +13,11 @@ from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login,
     logout as auth_logout, get_user_model, update_session_auth_hash)
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm, PasswordChangeForm
 from django.contrib.auth.tokens import default_token_generator
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from .form import MemberForm
+from .form import MemberForm,UpdateForm, MemberDetailForm
 from .models import Member
+from django.core.urlresolvers import reverse_lazy
 
 def logout_view(request):
     logout(request)
@@ -23,26 +25,35 @@ def logout_view(request):
 
 class UserFormView(View):
     form_class = MemberForm
+    form_class2 = MemberDetailForm
     template_name = 'users/registration_form.html'
 
     def get(self, request):
         form = self.form_class(None)
-        return render(request, self.template_name,{'form': form})
+        form.prefix = 'form'
+        form2 = self.form_class2(None)
+        form2.prefix = 'form2'
+        return render(request, self.template_name,{'form': form, 'form2': form2})
 
     # process form data
     def post(self, request):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, prefix = 'form')
+        form2 = self.form_class2(request.POST, request.FILES, prefix='form2')
 
-        if form.is_valid():
+        if form.is_valid() and form2.is_valid():
             user = form.save(commit=False)
+            memberUser = form2.save(commit=False)
+
+            member = Member()
 
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            member.avatar = form2.cleaned_data['avatar']
             user.set_password(password)
             user.save()
 
             user = authenticate(username=username, password=password)
-            member = Member(user=user, display_name=username)
+            member = Member(user=user, display_name=username, avatar= member.avatar)
             member.save()
 
             if user is not None:
@@ -51,7 +62,20 @@ class UserFormView(View):
                     login(request,user)
                     return redirect('home')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'form2': form2})
+
+class UserUpdate(UpdateView):
+    form_class = UpdateForm
+    model = Member
+
+    def get_queryset(self):
+        return Member.objects.all()
+
+    def get_object(self, queryset=None):
+        return self.request.user.member
+
+    success_url = reverse_lazy('home')
+
 
 def password_reset(request, is_admin_site=False,
                    template_name='registration/password_reset_form.html',

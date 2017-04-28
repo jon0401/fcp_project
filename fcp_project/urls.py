@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from games import views as games_views
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^games/', include('games.urls', namespace="games")),
@@ -16,4 +17,10 @@ urlpatterns = [
     url(r'^$', games_views.index, name='home'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
