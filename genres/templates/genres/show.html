@@ -12,13 +12,31 @@
       <div class="featured-games">
         <ul class="games">
           {% for game in games %}
-              <a href="{% url 'games:game' game.id %}">
-                <li class="game" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
-                  <div class="overlay">
-                    <h2>{{ game.name }}<div>{{ game.genre }}</div></h2>
+          <a href="{% url 'games:game' game.id %}">
+            <li class="game" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
+              <div class="overlay">
+                
+                <h2>
+                  {{ game.name }}
+                  <div>
+                    ${{ game.price }}
                   </div>
-                </li>
-              </a>
+                  <div>
+                    {% for tag in game.tags.all %}
+                      <div>{{ tag.name }}</div>
+                    {% endfor %}
+                  </div>
+                  <p>{{ game.description }}</p>
+                  <span>on
+                      {% for platform in game.platforms.all %}
+                        {{ platform.name }}
+                      {% endfor %}
+                  </span>
+                </h2>
+
+              </div>
+            </li>
+          </a>
           {% endfor %}
         </ul>
       </div>

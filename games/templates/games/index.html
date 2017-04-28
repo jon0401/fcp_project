@@ -4,9 +4,9 @@
     <div class="home cover" style="background-image: url('http://az616578.vo.msecnd.net/files/2016/08/08/6360623745264558091520775165_games.jpg'); background-size: cover;">
       <div class="overlay">
         <h1 class="name">Your Best Gaming Experiences</h1>
-        <div class="actions">
+        <!-- <div class="actions">
           <input type="text" name="" placeholder="Search Game..." value="">
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -19,7 +19,17 @@
               <a href="{% url 'games:game' game.id %}">
                 <li class="game" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
                   <div class="overlay">
-                    <h2>{{ game.name }}<div>{{ game.genre }}</div></h2>
+                    <span class="genre">{{ game.genre }}</span>
+                    <h2>
+                      {{ game.name }}<div>${{ game.price }}</div>
+                      <p>{{ game.description }}</p>
+                      <span>on
+                          {% for platform in game.platforms.all %}
+                            {{ platform.name }}
+                          {% endfor %}
+                      </span>
+                    </h2>
+
                   </div>
                 </li>
               </a>
@@ -31,13 +41,31 @@
       <div class="recommended-games">
         <ul class="games">
           {% for game in recommended_games %}
-              <a href="{% url 'games:game' game.id %}">
-                <li class="game" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
-                  <div class="overlay">
-                    <h2>{{ game.name }}<div>{{ game.genre }}</div></h2>
+          <a href="{% url 'games:game' game.id %}">
+            <li class="game" style="background-image: url('/media/{{ game.image }}'); background-size: cover;">
+              <div class="overlay">
+                <span class="genre">{{ game.genre }}</span>
+                <h2>
+                  {{ game.name }}
+                  <div>
+                    ${{ game.price }}
                   </div>
-                </li>
-              </a>
+                  <div>
+                    {% for tag in game.tags.all %}
+                      <div>{{ tag.name }}</div>
+                    {% endfor %}
+                  </div>
+                  <p>{{ game.description }}</p>
+                  <span>on
+                      {% for platform in game.platforms.all %}
+                        {{ platform.name }}
+                      {% endfor %}
+                  </span>
+                </h2>
+
+              </div>
+            </li>
+          </a>
           {% endfor %}
         </ul>
       </div>
